@@ -15,4 +15,7 @@ use App\Http\Controllers;
 |
 */
 
-Route::get('/productos', [App\Http\Controllers\ProductController::class, 'index']);
+Route::get('/productos', [App\Http\Controllers\ProductController::class, 'allProducts']);
+Route::get('/productos/{category_id}', [App\Http\Controllers\ProductController::class, 'productByCategory']);
+
+Route::get('/categorias', [App\Http\Controllers\CategoryController::class, 'allCategories']);
