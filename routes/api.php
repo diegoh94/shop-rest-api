@@ -15,7 +15,6 @@ use App\Http\Controllers;
 |
 */
 
-Route::get('/productos', [App\Http\Controllers\ProductController::class, 'allProducts']);
-Route::get('/productos/{category_id}', [App\Http\Controllers\ProductController::class, 'productByCategory']);
+Route::get('/products', [App\Http\Controllers\ProductController::class, 'showProducts']);
 
-Route::get('/categorias', [App\Http\Controllers\CategoryController::class, 'allCategories']);
+Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'showCategories']);
