@@ -13,7 +13,11 @@ class ProductController extends Controller
     	if ($request->has('category_id')) {
 			$products = Product::where('category', $request->input('category_id'))->get();
     	} else {
-    		$products = Product::all();
+    		if ($request->has('character')) {
+    			$products = Product::where('name','LIKE','%'.$request->input('character').'%')->get();
+    		} else {
+    			$products = Product::all();
+    		}
     	}
     	
     	return response()->json($products);  	
