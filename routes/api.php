@@ -16,5 +16,4 @@ use App\Http\Controllers;
 */
 
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'showProducts']);
-
 Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'showCategories']);
