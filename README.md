@@ -15,13 +15,13 @@ Para ello se ha implementado la solución de la siguiente manera:
 
 La API puede ser llamada de la siguiente manera dependiendo de lo que se necesite
 
-###Para devolver todos los productos
+### Para devolver todos los productos
 /api/products 
 
-###Para devolver los productos filtrados por categorías
+### Para devolver los productos filtrados por categorías
 /api/products?category_id=5 
 
-###Para devolver los productos filtrados por caracter
+### Para devolver los productos filtrados por caracter
 /api/products?character=redbull
 
 Tales rutas se han definido en **shop-rest-api/routes/api.php**
