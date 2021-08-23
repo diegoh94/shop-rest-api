@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="assets/app.css">
+
+    <title>Productos</title>
+
+</head>
+<body>
+	<nav class="bd-subnavbar py-4" aria-label="Secondary navigation">
+	  	<div class="container d-flex align-items-md-center">
+	    	<div class="position-relative me-auto">	      
+	      		<input id="searchProduct" list="listProducts" type="search" class="form-control" placeholder="Buscar producto">
+	    	</div>
+	    	<div class="dropdown ms-3">
+		  		<button class="btn btn-bd-light" id="bd-versions" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
+		    		<span class="d-none d-lg-inline">Bsale</span> 
+		    		<a href="indesx.html"><img src="https://img.icons8.com/fluency-systems-filled/48/000000/add-shopping-cart.png"/></a>
+		  		</button>
+			</div>
+	  	</div>
+	</nav>
+
+	<main class="py-4">        
+		<div class="container">
+			<div class="row justify-content-center">
+        		<div class=" col-md-4 mb-4">
+        			<div class="card">
+        				<div class="card-header">Categorías</div>
+        				<ul id="categories" class="list-group list-group-flush">
+							<li class="active list-group-item btn btn-primary text-left category-list" value="">Todos</li>
+        					<!-- Aquí se imprimirán la lista de categorías -->
+        				</ul>
+        			</div>        				
+				</div>
+				<div class="col-md-8">
+					<div class="card">
+						<div class="card-header">Productos</div>
+						<div class="card-body card-body-products">
+							<div id="products" class="row justify-content">
+								<!-- Aquí se imprimirán los productos-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</main>
+
+	<!-- Templates que serán insertados dinámicamente -->
+	<template id="templateProduct">
+		<div class="col-md-6 col-xl-4 mb-4">
+			<div class="card card-product">
+				<img src="" class="card-img-top" alt="">
+			    <div class="card-body">
+			    	<h3 class="card-title h6"></h3>
+			  	</div>	
+			  	<div class="card-footer">
+			  		<div class="d-flex justify-content-between total font-weight-bold">
+			  			<span class="price"></span>
+			  				<button type="button" class="btn btn-light btn-buy"> 
+                         		<img src="https://img.icons8.com/fluency-systems-filled/48/000000/add-shopping-cart.png">
+                         	</button> 
+			  		</div>
+			  	</div>	
+			  	<div class="discount"></div>
+			</div>							  
+		</div>
+	</template>
+
+	<template id="templateCategory">
+		<li class="list-group-item btn btn-primary text-left category-list" value=""></li>
+	</template>
+
+
+
+	<!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <!-- scripts  -->
+	<script src="assets/js/app.js"></script>
+	<script src="assets/js/render-products.js"></script>
+	<script src="assets/js/render-categories.js"></script>
+</body>
+</html>
