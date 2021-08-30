@@ -10,27 +10,43 @@ const API_PRODUCTS = "http://147.182.160.199/api/products";
 let category_id = null;
 let character_like = null;
 let filterType = null;
+let infoType = null;
 
 /**
- *Constantes de contenedores HTML
+ *Constantes de elementos HTML
  */
 const htmlCategories = document.querySelector("#categories");
 const htmlProducts = document.querySelector("#products");
+const htmlSearchInfo = document.querySelector('#searchInfo');
 const inputSearch = document.querySelector('#searchProduct');
+const btnSearch = document.querySelector('#searchButton');
+const quantityProducts = document.querySelector('#quantityProducts');
+const contentAlert = document.querySelector('#contentAlert');
+
+/**
+ *Constantes de templates
+ */
+const templateAdditionalInfo = document.querySelector('#templateAdditionalInfo');
+const templateLoadingIndicator = document.querySelector("#templateLoadingIndicator");
+const templateProduct = document.querySelector("#templateProduct");
+const templateCategory = document.querySelector("#templateCategory");
+const templateProductQuantity = document.querySelector("#templateProductQuantity");
 
 /**
  *Métodos que se ejecutan al cargar la vista para desplegar los productos y/o categorías
  */
+addLoadingIndicator();
 addElementCategory();
 addElementProducts(getProductsApiUrl(category_id, filterType));
 listenToEvents();
 
 /**
- * Función que escucha eventos para realizar peticiones a la pai según corresponda
+ * Escucha eventos para realizar peticiones a la API según corresponda
  */
 function listenToEvents(){
 	document.addEventListener('click', isCategory)
-	inputSearch.addEventListener('input', searchProducts);
+	btnSearch.addEventListener('click', searchProducts);
+	inputSearch.addEventListener("keyup", enterValidate);
 }
 
 /**
@@ -40,8 +56,13 @@ function listenToEvents(){
 function isCategory	(e){
 	if(e.target.tagName.toLowerCase() === 'li'){
 	    category_id = e.target.value;
-	    filterType = 'byCategory';	    
+	    category_name = e.target.dataset.name;
+	    filterType = 'byCategory';
+	    searchType = 'category';
+	    clearContainerHTML(contentAlert);	
+		renderAdditionalInfo(category_name, searchType);	    
 	    activateCategory(e);
+	    addLoadingIndicator();   
 	    addElementProducts(getProductsApiUrl(category_id, filterType));
 	}
 }
@@ -49,10 +70,8 @@ function isCategory	(e){
 /**
  *Función que agrega la clase "active" al elemento que disparó el evento
  */
-function activateCategory(e){
-	htmlCategories.querySelectorAll('li').forEach(function(userItem) {
-	  userItem.classList.remove("active");
-	});
+function activateCategory(e){	
+	removeActiveCategory();
 	e.target.classList.add("active");
 }
 
@@ -60,10 +79,17 @@ function activateCategory(e){
  *Función que genera las variables que serán enviadas como parámetros 
  *para construir la ruta de la api
  */
-function searchProducts(e){
-	character_like = e.target.value;
-	filterType = 'searchProducts'
-	addElementProducts(getProductsApiUrl(character_like, filterType));
+function searchProducts(e){ 
+	character_like = inputSearch.value;
+	if(validateText()){
+		filterType = 'searchProducts';
+		searchType = 'search'
+		clearContainerHTML(contentAlert);	
+		renderAdditionalInfo(character_like, searchType);
+		addLoadingIndicator();
+		removeActiveCategory();
+		addElementProducts(getProductsApiUrl(character_like, filterType));		
+	}
 }
 
 /**
@@ -89,11 +115,16 @@ function addElementProducts(apiURl){
 	console.log(apiURl)
 	fetch(apiURl)
 	.then((response) => response.json())
-	.then((products) => {		
-		htmlProducts.innerHTML = "";		
+	.then((products) => {	
+		clearContainerHTML(htmlProducts);	
+		clearContainerHTML(quantityProduts);
+
+		let i = 0;
 		for(product of products){
 			renderProduct(product);
+			i++;
 		}
+		renderProductsQuantity(i);
 	});	
 }
 
@@ -109,6 +140,59 @@ function getProductsApiUrl(data, filterType){
 	}
 	return API_PRODUCTS;
 }
+
+/**
+ *Inserta loading indicator en contenedor
+ */
+ function addLoadingIndicator(){
+	let template = document.importNode(templateLoadingIndicator.content, true);
+	clearContainerHTML(htmlProducts);
+	htmlProducts.appendChild(template);
+ }
+/**
+ *Limpiar contenedor
+ */
+function clearContainerHTML(container){
+ 	container.innerHTML = "";
+}
+
+/**
+ *Remover selección de categorías
+ */
+function removeActiveCategory(){
+ 	htmlCategories.querySelectorAll('li').forEach(function(userItem) {
+	  userItem.classList.remove("active");
+	});
+}
+
+/**
+ *Limpiar search input
+ */
+function clearSearchInput(){
+ 	inputSearch.value = "";
+}
+
+/**
+ *Valida que la tecla que activo el evento sea Enter
+ */
+function enterValidate(e){
+	if(e.keyCode === 13){
+		searchProducts(e);
+	}
+}
+
+function validateText(){
+	if(inputSearch.value.length == 0){
+		let contentAlert = document.querySelector('#contentAlert');
+		contentAlert.innerHTML = "Debe ingresar al menos un caracter";
+		return false;
+	}
+	return true;
+
+}
+ 
+
+
 
 
 

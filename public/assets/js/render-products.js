@@ -3,10 +3,9 @@
  * como parámetro para insertar los valores correspondientes 
  * y finalmente renderizarlo en el navegador.
  */
-function renderProduct(product) {	
-	let elementTemplate = document.querySelector("#templateProduct");
-	let template = document.importNode(elementTemplate.content, true);
-	
+function renderProduct(product) {			
+	let template = document.importNode(templateProduct.content, true);
+
 	renderProductImage(template, product);
 	renderProductTitle(template, product.name);
 	renderProductPrice(template, product.price);
@@ -48,6 +47,7 @@ function renderProductDiscount(template, discount){
 		template.querySelector('div.discount').className = "d-none"
 	}
 }
+
 /**
  * Esta función recibe un producto y devuelve la URL de su imagen.
  * El valor es el mismo a menos que no tenga, y se use una imagen por defecto.
@@ -79,3 +79,9 @@ function getFormattedDiscount(discount) {
 	return discount+'%';
 }
 
+function getProductQuantity(product){
+	let i = 0;
+	
+	console.log(i);	
+	return i
+}

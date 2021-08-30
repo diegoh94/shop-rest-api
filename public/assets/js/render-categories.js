@@ -3,9 +3,8 @@
  * como parámetro para insertar los valores correspondientes 
  * y finalmente renderizarlo en el navegador.
  */
-function renderCategory(category) {	
-	let elementTemplate = document.querySelector("#templateCategory");
-	let template = document.importNode(elementTemplate.content, true);
+function renderCategory(category) {		
+	let template = document.importNode(templateCategory.content, true);
 
 	renderCategoryName(template, category);
 
@@ -18,4 +17,5 @@ function renderCategory(category) {
 function renderCategoryName(template, category){
 	template.querySelector('li').innerHTML = category.name;
 	template.querySelector('li').value = category.id;
+	template.querySelector('li').dataset.name = category.name;
 }

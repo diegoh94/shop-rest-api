@@ -14,37 +14,43 @@
 
 </head>
 <body>
-	<nav class="bd-subnavbar py-4" aria-label="Secondary navigation">
+	<nav class="pt-4 nav-search" aria-label="Secondary navigation">
 	  	<div class="container d-flex align-items-md-center">
-	    	<div class="position-relative me-auto">	      
-	      		<input id="searchProduct" list="listProducts" type="search" class="form-control" placeholder="Buscar producto">
+	    	<div class="position-relative me-auto content-search">	      
+	      		<input id="searchProduct" list="listProducts" type="search" class="form-control" placeholder="Hola, ¿Qué estas buscando?" required>
+	      		<button id="searchButton" type="button" class="btn btn-primary ml-2">Buscar</button>
 	    	</div>
-	    	<div class="dropdown ms-3">
-		  		<button class="btn btn-bd-light" id="bd-versions" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
-		    		<span class="d-none d-lg-inline">Bsale</span> 
-		    		<a href="indesx.html"><img src="https://img.icons8.com/fluency-systems-filled/48/000000/add-shopping-cart.png"/></a>
-		  		</button>
-			</div>
 	  	</div>
+	  	<div id="contentAlert" class="container"></div>
+	    	
 	</nav>
 
-	<main class="py-4">        
+	<div class="py-4">        
 		<div class="container">
+			<div class="row mb-4">
+				<div id="searchInfo" class="col-12">
+					<!-- Aquí se imprimira información adicional de la búsqueda realizada -->
+					<p class="h5">Descubre y elige tu producto</p>
+				</div>
+			</div>
 			<div class="row justify-content-center">
         		<div class=" col-md-4 mb-4">
         			<div class="card">
-        				<div class="card-header">Categorías</div>
+        				<div class="card-header h6">Categorías</div>
         				<ul id="categories" class="list-group list-group-flush">
 							<li class="active list-group-item btn btn-primary text-left category-list" value="">Todos</li>
-        					<!-- Aquí se imprimirán la lista de categorías -->
+        					<!-- Aquí se imprimirán la lista de categorías -->        					
         				</ul>
         			</div>        				
 				</div>
 				<div class="col-md-8">
 					<div class="card">
-						<div class="card-header">Productos</div>
+						<div id="quantityProduts" class="card-header">
+							<span>Cargando productos ...</span>
+							<!-- Aquí se imprimirán la cantidad de productos listados -->							
+						</div>
 						<div class="card-body card-body-products">
-							<div id="products" class="row justify-content">
+							<div id="products" class="row justify-content">								
 								<!-- Aquí se imprimirán los productos-->
 							</div>
 						</div>
@@ -53,14 +59,14 @@
 			</div>
 		</div>
 
-	</main>
+	</div>
 
 	<!-- Templates que serán insertados dinámicamente -->
 	<template id="templateProduct">
 		<div class="col-md-6 col-xl-4 mb-4">
 			<div class="card card-product">
 				<img src="" class="card-img-top" alt="">
-			    <div class="card-body">
+			    <div class="card-body" style="height: 65px">
 			    	<h3 class="card-title h6"></h3>
 			  	</div>	
 			  	<div class="card-footer">
@@ -80,6 +86,20 @@
 		<li class="list-group-item btn btn-primary text-left category-list" value=""></li>
 	</template>
 
+	<template id="templateLoadingIndicator">
+		<div class="loading-indicator">
+			<img src="assets/images/loading_indicator.gif">
+		</div>
+	</template>
+
+	<template id="templateAdditionalInfo">
+		<p class="h5">Resultados de búsqueda para "<span></span>"</p>
+	</template>
+
+	<template id="templateProductQuantity">
+		<span class="h6">Productos</span>
+	</template>
+
 
 
 	<!-- Option 1: Bootstrap Bundle with Popper -->
@@ -89,5 +109,6 @@
 	<script src="assets/js/app.js"></script>
 	<script src="assets/js/render-products.js"></script>
 	<script src="assets/js/render-categories.js"></script>
+	<script src="assets/js/render-info.js"></script>
 </body>
 </html>

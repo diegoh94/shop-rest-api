@@ -21,3 +21,27 @@
 	border-width: 2px;
 	border-color: #00000020;
 }
+.loading-indicator{
+	display: flex;
+	width: 100%;
+}
+.loading-indicator img{
+	margin: auto; 
+	height: 100px; 
+}
+.content-search{
+	display: flex; 
+	width: 70%;
+}
+@media(max-width: 768px){
+	.content-search{
+		display: flex; 
+		width: 100%;
+	}
+}
+.search-button{
+	margin-left: 10px;
+}
+#contentAlert{
+	color: red;
+}
